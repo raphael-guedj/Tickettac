@@ -7,28 +7,28 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
-  min-height: 100vh;
+  height: 100vh;
   color: #f8edeb;
   letter-spacing: 1px;
   word-spacing: 2px;
   background: #7db9e8; /* Old browsers */
   background: -moz-linear-gradient(
     top,
-    #abd0ec 0%,
+    #c6def0 0%,
     #7db9e8 49%,
-    #1e5799 100%
+    #1c4a7e 100%
   ); /* FF3.6-15 */
   background: -webkit-linear-gradient(
     top,
-    #abd0ec 0%,
+    #c6def0 0%,
     #7db9e8 49%,
-    #1e5799 100%
+    #183d68 100%
   ); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(
     to bottom,
-    #abd0ec 0%,
-    #7db9e8 49%,
-    #4579b4 100%
+    #d9edfc 0%,
+    #6eb1e4 49%,
+    #125db3 100%
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
@@ -47,10 +47,10 @@ section {
   color: #f8edeb;
   letter-spacing: 1px;
   word-spacing: 2px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin-top: 100px;
 }
 
 .form-group {
@@ -63,12 +63,22 @@ section {
   background-image: url("/images/landmark.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 300px;
-  height: 100vh;
+  background-size: 250px;
+  height: 80vh;
+}
+
+/* success */
+.list-group-item {
+  padding: 35px 30px;
+}
+
+/* lasttrips */
+.cell {
+  padding: 2rem;
 }
 
 /* footer */
 
 footer {
-  color: #f0efeb;
+  color: rgba(169, 169, 168, 0.5);
 }

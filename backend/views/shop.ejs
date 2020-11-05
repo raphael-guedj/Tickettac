@@ -16,7 +16,7 @@
     <%- include('navbar'); %>
     <div class="container">
         <div class="mt-5">
-            <h4 class="text-white ml-5 pl-5">My tickets: </h4>
+            <h2 class="text-white offset-md-3">My tickets: </h2>
             <table class="table mt-4">
                 <tbody>
                 <tr class="table-light">
@@ -47,15 +47,13 @@
                     <td></td>
                     <td>218 €</td>
                 </tr> 
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><button class="btn btn-danger">Confirm</button></td>    
-                </tr>
                 </tbody>
             </table>
+            <div class="row justify-content-end">
+                <div class="pr-4">
+                    <button class="btn btn-danger">Confirm</button>    
+                </div>
+            </div>
         </div>
     </div>
     <%- include('footer'); %>
