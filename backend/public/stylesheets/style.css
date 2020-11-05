@@ -72,9 +72,47 @@ section {
   padding: 35px 30px;
 }
 
-/* lasttrips */
-.cell {
-  padding: 2rem;
+.table td,
+.table th {
+  padding: 1.15rem;
+}
+
+/* pop up */
+h5 {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.pop-up {
+  padding: 10px;
+  color: rgb(155, 155, 155);
+}
+
+.modal-content {
+  background: -moz-linear-gradient(
+    top,
+    #c6def0 0%,
+    #7db9e8 49%,
+    #1c4a7e 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #c6def0 0%,
+    #7db9e8 49%,
+    #183d68 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #d9edfc 0%,
+    #6eb1e4 49%,
+    #125db3 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 /* footer */
