@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var journeyModel = require("../models/journeys");
+var JourneyModel = require("../models/journeys");
+var UserModel = require("../models/users");
 
 var city = [
   "Paris",
@@ -20,11 +21,12 @@ var date = [
   "2018-11-24",
 ];
 
-/* GET home page. */
+/* GET login page. */
 router.get("/", function (req, res, next) {
   res.render("login", { title: "Express" });
 });
 
+/*GET home page. */
 router.get("/home", function (req, res, next) {
   res.render("homepage", { title: "Express" });
 });
@@ -53,7 +55,7 @@ router.get("/lasttrips", function (req, res, next) {
 router.get("/result", function (req, res, next) {
   // Permet de savoir combien de trajets il y a par ville en base
   for (i = 0; i < city.length; i++) {
-    journeyModel.find(
+    JourneyModel.find(
       { departure: city[i] }, //filtre
 
       function (err, journey) {

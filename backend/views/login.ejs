@@ -34,7 +34,7 @@
           <div class="formArea">
             <h4 class="titleForm mb-4">Sign-In :</h4>
 
-            <form action="/" method="POST">
+            <form action="/users/sign-in" method="POST">
               <div class="form-group">
                 <input
                   name="email"
@@ -64,15 +64,13 @@
           <div class="formArea">
             <h4 class="titleForm mb-4">Sign-Up :</h4>
 
-            <form action="/" method="POST">
+            <form action="/users/sign-up" method="POST">
               <div class="form-group">
                 <input
-                  name="name"
+                  name="lastname"
                   type="text"
                   class="form-control"
                   placeholder="Name"
-                  pattern="[A-Za-z]"
-                  required
                 />
               </div>
               <div class="form-group">
@@ -81,8 +79,7 @@
                   type="text"
                   class="form-control"
                   placeholder="FirstName"
-                  pattern="[A-Za-z]"
-                  required
+
                 />
               </div>
               <div class="form-group">
@@ -100,9 +97,6 @@
                   type="password"
                   class="form-control"
                   placeholder="Password"
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                  required
-                  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                 />
               </div>
 
