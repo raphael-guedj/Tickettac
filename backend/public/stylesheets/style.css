@@ -7,27 +7,29 @@
 body {
   font-family: "Open Sans", sans-serif;
   font-size: 18px;
-  height: 100vh;
+  min-height: 100vh;
+  color: #f8edeb;
+  letter-spacing: 1px;
+  word-spacing: 2px;
   background: #7db9e8; /* Old browsers */
   background: -moz-linear-gradient(
     top,
-    #7db9e8 0%,
+    #abd0ec 0%,
     #7db9e8 49%,
     #1e5799 100%
   ); /* FF3.6-15 */
   background: -webkit-linear-gradient(
     top,
-    #7db9e8 0%,
+    #abd0ec 0%,
     #7db9e8 49%,
     #1e5799 100%
   ); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(
     to bottom,
-    #7db9e8 0%,
+    #abd0ec 0%,
     #7db9e8 49%,
     #4579b4 100%
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 ); /* IE6-9 */
 }
 
 /* logo image navbar */
@@ -49,4 +51,19 @@ body {
 
 .form-group {
   margin-bottom: 1.1rem;
+}
+
+/* Homepage */
+
+.image-bg {
+  background-image: url("/images/landmark.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 300px;
+  height: 100vh;
+}
+
+.title-home {
+  padding-left: 15%;
+  margin-top: 70px;
 }

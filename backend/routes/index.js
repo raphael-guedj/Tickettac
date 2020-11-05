@@ -58,6 +58,10 @@ router.get("/", function (req, res, next) {
   res.render("login", { title: "Express" });
 });
 
+router.get("/home", function (req, res, next) {
+  res.render("homepage", { title: "Express" });
+});
+
 /* GET success page -- page qui s'affiche après avoir interrogé la base de données et qui affiche tous les trains dispos  */
 router.get("/success", function (req, res, next) {
   res.render("success", { title: "Express" });
