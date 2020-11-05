@@ -67,6 +67,16 @@ router.get("/success", function (req, res, next) {
   res.render("success", { title: "Express" });
 });
 
+/* GET shop page. représente le panier contenant les billets*/ 
+router.get("/shop", function (req, res, next) {
+  res.render("shop", { title: "Express" });
+});
+
+/* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/ 
+router.get("/lasttrips", function (req, res, next) {
+  res.render("lasttrips", { title: "Express" });
+});
+
 // Remplissage de la base de donnée, une fois suffit
 router.get("/save", async function (req, res, next) {
   // How many journeys we want
