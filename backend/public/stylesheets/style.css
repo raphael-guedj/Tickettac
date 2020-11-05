@@ -63,7 +63,6 @@ body {
   height: 100vh;
 }
 
-.title-home {
-  padding-left: 15%;
-  margin-top: 70px;
+section {
+  padding-top: 80px;
 }

@@ -62,17 +62,21 @@ router.get("/home", function (req, res, next) {
   res.render("homepage", { title: "Express" });
 });
 
+router.get("/failed", function (req, res, next) {
+  res.render("failed", { title: "Express" });
+});
+
 /* GET success page -- page qui s'affiche après avoir interrogé la base de données et qui affiche tous les trains dispos  */
 router.get("/success", function (req, res, next) {
   res.render("success", { title: "Express" });
 });
 
-/* GET shop page. représente le panier contenant les billets*/ 
+/* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
   res.render("shop", { title: "Express" });
 });
 
-/* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/ 
+/* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/
 router.get("/lasttrips", function (req, res, next) {
   res.render("lasttrips", { title: "Express" });
 });
