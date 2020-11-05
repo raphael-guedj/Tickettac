@@ -32,6 +32,10 @@ body {
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
+section {
+  padding-top: 80px;
+}
+
 /* logo image navbar */
 
 .logo {
@@ -63,6 +67,8 @@ body {
   height: 100vh;
 }
 
-section {
-  padding-top: 80px;
+/* footer */
+
+footer {
+  color: #f0efeb;
 }
