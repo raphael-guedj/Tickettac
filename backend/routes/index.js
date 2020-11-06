@@ -42,7 +42,7 @@ router.post("/success", async function (req, res, next) {
   }
 
   var success = [];
-  console.log(req.body);
+  // console.log(req.body);
 
   var journey = await JourneyModel.find({
     departure: req.body.departure,
@@ -80,27 +80,30 @@ router.get("/failed", function (req, res, next) {
 /* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
   var alreadyExist = false;
-  for (var i=0; i<req.session.journeys.length; i++) {
-    if (req.session.journey[i].price == req.query.price) {
-      alreadyExist = true;
-      res.redirect('/success');
-    } 
-    if (alreadyExist == false) {
+  console.log(req.query);
+
+  if (req.session.journeys[i].price === req.query.price) {
+    alreadyExist = true;
+    console.log("exist");
+    res.redirect("/success");
+  } else {
     req.session.journeys.push({
       departure_city: req.query.departure_city,
       arrival_city: req.query.arrival_city,
       date: req.query.date,
-      departure_time: req.query.departure_time,
-      price: req.query.price
-      }) 
-    }
+      departure_time: req.query.departureTime,
+      price: req.query.price,
+    });
+    console.log("testok");
   }
   res.render("shop", { journeys: req.session.journeys });
 });
 
 /* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/
 router.get("/lasttrips", async function (req, res, next) {
-  var user = await UserModel.findById(req.session.id).populate('journeys').exec();
+  var user = await UserModel.findById(req.session.id)
+    .populate("journeys")
+    .exec();
   res.render("lasttrips", { lasttrips: user.myjourneys });
 });
 

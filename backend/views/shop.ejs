@@ -26,9 +26,7 @@
     <div class="container">
       <div class="mt-5">
         <h2 class="text-white offset-md-2">My tickets:</h2>
-        <% if (journeys.length < 1) { %>
-          <p style="color:red">You didn't select a ticket yet</p>
-        <% } else { %>  
+        
         <table class="table mt-4">
           <tbody>
             <tr class="table-light">
@@ -40,7 +38,8 @@
             </tr>
             <% 
             var total = 0;
-            for(var i = 0; i<journeys.length; i++) {
+            for(var i = 0; i < journeys.length; i++) {
+              
             %>
             <tr class="table-light">
               <th scope="row"><span><%= i %></span></th>
@@ -49,9 +48,7 @@
               <td><%= journeys[i].departure_time %></td>
               <td><%= journeys[i].price %> €</td>
             </tr>
-            <% total += journeys[i].price
-            }
-            %>
+            <% total += journeys[i].price } %>
             <tr class="table-danger">
               <th scope="row"><span>Total</span></th>
               <td></td>
@@ -61,15 +58,14 @@
             </tr>
           </tbody>
         </table>
-        <% } %>
+  
         <div class="row justify-content-end">
           <div class="pr-4">
             <a
               class="btn btn-danger"
               data-toggle="modal"
               data-target="#staticBackdrop"
-              >Confirm</a
-            >
+              >Confirm</a>
           </div>
         </div>
       </div>
