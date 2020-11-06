@@ -27,9 +27,12 @@
     <div id="container">
       <div class="row col-12 mt-5 d-flex justify-content-center">
         <div class="col-lg-6 mt-2 pl-5 text-white">
-          <h2>Tickets available on 02/08 :</h2>
+          <% var date = success[0].date; var newFormat = date.slice(8,10) + "/"
+          + date.slice(5,7) %>
+          <h2>Tickets available on <%= newFormat %> :</h2>
         </div>
       </div>
+      <% for (var i =0; i < success.length; i++) { %>
       <div
         class="row col-12 mt-3 d-flex justify-content-center align-items-center"
       >
@@ -38,64 +41,29 @@
             <li
               class="list-group-item d-flex justify-content-between align-items-center"
             >
-              <span class="text-dark">Paris/Lille</span>
-              <span class="text-secondary">train departure at : 15:00 pm</span>
+              <span class="text-dark font-weight-bold"
+                ><%= success[i].departure%>/<%= success[i].arrival%></span
+              >
+              <span class="text-secondary"
+                >train departure at : <%=success[i].departureTime%>h</span
+              >
               <div>
-                <span class="pr-2 text-dark">93€</span>
+                <span class="pr-2 text-dark"><%= success[i].price%>€</span>
                 <span
-                  ><button type="button" class="btn btn-danger">
+                  ><a
+                    href="/shop?departure_city=<%= success[i].departure%>&arrival_city=<%= success[i].arrival%>&date=<%=success[i].date %>&departureTime=<%=success[i].departureTime%>&price=<%= success[i].price%>"
+                    class="btn btn-danger"
+                  >
                     OK
-                  </button></span
+                  </a></span
                 >
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <div
-        class="row col-12 mt-2 d-flex justify-content-center align-items-center"
-      >
-        <div class="col-lg-6 mt-2 text-center">
-          <ul class="list-group">
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <span class="text-dark">Paris/Lille</span>
-              <span class="text-secondary">train departure at : 17:00 pm</span>
-              <div>
-                <span class="pr-2 text-dark">99€</span>
-                <span
-                  ><button type="button" class="btn btn-danger">
-                    OK
-                  </button></span
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div
-        class="row col-12 mt-2 d-flex justify-content-center align-items-center"
-      >
-        <div class="col-lg-6 mt-2 text-center">
-          <ul class="list-group">
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <span class="text-dark">Paris/Lille</span>
-              <span class="text-secondary">train departure at : 22:00 pm</span>
-              <div>
-                <span class="pr-2 text-dark">78€</span>
-                <span
-                  ><button type="button" class="btn btn-danger">
-                    OK
-                  </button></span
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+
+      <% } %>
     </div>
     <%- include('footer'); %>
     <script
