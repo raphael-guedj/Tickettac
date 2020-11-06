@@ -42,12 +42,29 @@ router.get("/success", function (req, res, next) {
 
 /* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
-  res.render("shop", { title: "Express" });
+  var alreadyExist = false;
+  for (var i=0; i<req.session.journeys.length; i++) {
+    if (req.session.journey[i].price == req.query.price) {
+      alreadyExist = true;
+      res.redirect('/success');
+    } 
+    if (alreadyExist == false) {
+    req.session.journeys.push({
+      departure_city: req.query.departure_city,
+      arrival_city: req.query.arrival_city,
+      date: req.query.date,
+      departure_time: req.query.departure_time,
+      price: req.query.price
+      }) 
+    }
+  }
+  res.render("shop", { journeys: req.session.journeys });
 });
 
 /* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/
-router.get("/lasttrips", function (req, res, next) {
-  res.render("lasttrips", { title: "Express" });
+router.get("/lasttrips", async function (req, res, next) {
+  var user = await UserModel.findById(req.session.id).populate('journeys').exec();
+  res.render("lasttrips", { lasttrips: user.myjourneys });
 });
 
 // Cette route est juste une verification du Save.

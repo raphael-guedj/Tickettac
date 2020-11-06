@@ -26,6 +26,9 @@
     <div class="container">
       <div class="mt-5">
         <h2 class="text-white offset-md-2">My tickets:</h2>
+        <% if (journeys.length < 1) { %>
+          <p style="color:red">You didn't select a ticket yet</p>
+        <% } else { %>  
         <table class="table mt-4">
           <tbody>
             <tr class="table-light">
@@ -35,29 +38,30 @@
               <th scope="col">Departure time</th>
               <th scope="col">Price</th>
             </tr>
+            <% 
+            var total = 0;
+            for(var i = 0; i<journeys.length; i++) {
+            %>
             <tr class="table-light">
-              <th scope="row"><span>1</span></th>
-              <td>Paris/Lille</td>
-              <td>02/08/2019</td>
-              <td>15:00 pm</td>
-              <td>93 €</td>
+              <th scope="row"><span><%= i %></span></th>
+              <td><%= journeys[i].departure_city %>/<%= journeys[i].arrival_city %></td>
+              <td><%= journeys[i].date %></td>
+              <td><%= journeys[i].departure_time %></td>
+              <td><%= journeys[i].price %> €</td>
             </tr>
-            <tr class="table-light">
-              <th scope="row"><span>2</span></th>
-              <td>Paris/Bordeaux</td>
-              <td>07/12/2019</td>
-              <td>19:00 pm</td>
-              <td>125 €</td>
-            </tr>
+            <% total += journeys[i].price
+            }
+            %>
             <tr class="table-danger">
               <th scope="row"><span>Total</span></th>
               <td></td>
               <td></td>
               <td></td>
-              <td class="font-weight-bold">218 €</td>
+              <td class="font-weight-bold"><%= total %> €</td>
             </tr>
           </tbody>
         </table>
+        <% } %>
         <div class="row justify-content-end">
           <div class="pr-4">
             <a
@@ -100,112 +104,36 @@
           </div>
           <div class="modal-body">
             <div class="row justify-content-center">
+              <% 
+              for(var i = 0; i<journeys.length; i++) {
+              %>  
               <ul class="list-group list-group-flush mt-2 mx-1">
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small">Order N°</span
-                  >1
+                  ><%= i %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small"
                     >Journey :</span
                   >
-                  Paris/Lille
+                  <%= journeys[i].departure_city %>/<%= journeys[i].arrival_city %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small">Date :</span>
-                  02/08/2019
+                  <%= journeys[i].date %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small"
                     >Departure :</span
                   >
-                  15:00 pm
+                  <%= journeys[i].departure_time %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small">Price :</span>
-                  93 €
+                  <%= journeys[i].departure_price %> €
                 </li>
               </ul>
-
-              <ul class="list-group list-group-flush mt-2 mx-1">
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Order N°</span
-                  >1
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small"
-                    >Journey :</span
-                  >
-                  Paris/Lille
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Date :</span>
-                  02/08/2019
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small"
-                    >Departure :</span
-                  >
-                  15:00 pm
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Price :</span>
-                  93 €
-                </li>
-              </ul>
-
-              <ul class="list-group list-group-flush mt-2 mx-1">
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Order N°</span
-                  >1
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small"
-                    >Journey :</span
-                  >
-                  Paris/Lille
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Date :</span>
-                  02/08/2019
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small"
-                    >Departure :</span
-                  >
-                  15:00 pm
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Price :</span>
-                  93 €
-                </li>
-              </ul>
-              <ul class="list-group list-group-flush mt-2 mx-1">
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Order N°</span
-                  >1
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small"
-                    >Journey :</span
-                  >
-                  Paris/Lille
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Date :</span>
-                  02/08/2019
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small"
-                    >Departure :</span
-                  >
-                  15:00 pm
-                </li>
-                <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Price :</span>
-                  93 €
-                </li>
-              </ul>
+              <% } %>
             </div>
           </div>
           <div class="modal-footer">
