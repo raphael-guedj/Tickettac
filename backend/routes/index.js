@@ -64,6 +64,7 @@ router.post("/success", async function (req, res, next) {
           date: req.body.date,
           departureTime: journey[i].departureTime,
           price: journey[i].price,
+          id: journey[i]._id
         });
       }
     }
@@ -87,22 +88,46 @@ router.get("/shop", function (req, res, next) {
   }
   if (alreadyExists == false) {
     req.session.journeys.push({
-      departure_city: req.query.departure_city,
-      arrival_city: req.query.arrival_city,
+      departure: req.query.departure,
+      arrival: req.query.arrival,
       date: req.query.date,
-      departure_time: req.query.departureTime,
-      price: Number(req.query.price)
+      departureTime: req.query.departureTime,
+      price: Number(req.query.price),
+      id: req.query.id
       }) 
   }
-  console.log(req.session.journeys);
-  res.render("shop", { journeys : req.session.journeys });
+    res.render("shop", { journeys : req.session.journeys });
 });
+
+/* GET */
+router.get("/updateuser", async function (req, res, next) {
+  console.log("route update user");
+  console.log(req.session.user)
+  console.log(req.session.journeys);
+  var myjourneys = req.session.journeys;
+  const user = await UserModel.findById(req.session.user.id);
+  for (var i=0; i<myjourneys.length; i++) {
+  user.myjourneys.push({   
+    departure: myjourneys[i].departure,
+    arrival: myjourneys[i].arrival,
+    date: myjourneys[i].date,
+    departureTime: myjourneys[i].departure,
+    price: myjourneys[i].price})
+  }
+  await user.save();
+  console.log(user);
+  // var user = await UserModel.updateMany({_id: req.session.user.id}, {myjourneys: req.session.journeys});
+  res.redirect("/home");
+});
+
 
 /* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/
 router.get("/lasttrips", async function (req, res, next) {
-  var user = await UserModel.findById(req.session.id).populate('journeys').exec();
+  const user = await UserModel.findById(req.session.user.id);
   res.render("lasttrips", { lasttrips: user.myjourneys });
 });
+
+
 
 // Cette route est juste une verification du Save.
 // Vous pouvez choisir de la garder ou la supprimer.

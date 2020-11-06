@@ -20,7 +20,7 @@ router.post('/sign-up', async function(req, res, next) {
       lastName : req.body.lastname,
       firstName: req.body.firstname,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
     });
     newUser = await newUser.save();
     req.session.user = {

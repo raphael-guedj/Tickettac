@@ -44,7 +44,7 @@
             var total = 0;
             for(var i = 0; i<journeys.length; i++) {
               var time = "";
-              if ( Number(journeys[i].departure_time) < 1200) {
+              if ( Number(journeys[i].departureTime) < 1200) {
                 time = " AM"
               } else {
                 time = " PM"
@@ -52,9 +52,9 @@
             %>
             <tr class="table-light">
               <th scope="row"><span><%= i+1 %></span></th>
-              <td><%= journeys[i].departure_city %>/<%= journeys[i].arrival_city %></td>
+              <td><%= journeys[i].departure %>/<%= journeys[i].arrival%></td>
               <td><%= newFormat %></td>
-              <td><%= journeys[i].departure_time %><%= time %></td>
+              <td><%= journeys[i].departureTime %><%= time %></td>
               <td><%= journeys[i].price %> €</td>
             </tr>
             <% total += journeys[i].price
@@ -73,9 +73,9 @@
         <div class="row justify-content-end">
           <div class="pr-4">
             <a
+              href="/updateuser"
               class="btn btn-danger"
-              data-toggle="modal"
-              data-target="#staticBackdrop"
+
               >Confirm</a
             >
           </div>
@@ -113,32 +113,40 @@
           <div class="modal-body">
             <div class="row justify-content-center">
               <% 
+              var date = journeys[0].date;
+              var newFormat = date.slice(8,10) + "/" + date.slice(5,7) + "/" + date.slice(0,4);
               for(var i = 0; i<journeys.length; i++) {
+                var time = "";
+                if ( Number(journeys[i].departureTime) < 1200) {
+                  time = " AM"
+                } else {
+                  time = " PM"
+                }
               %>  
               <ul class="list-group list-group-flush mt-2 mx-1">
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small">Order N°</span
-                  ><%= i %>
+                  ><%= i+1 %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small"
                     >Journey :</span
                   >
-                  <%= journeys[i].departure_city %>/<%= journeys[i].arrival_city %>
+                  <%= journeys[i].departure %>/<%= journeys[i].arrival %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small">Date :</span>
-                  <%= journeys[i].date %>
+                  <%= newFormat %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small"
                     >Departure :</span
                   >
-                  <%= journeys[i].departure_time %>
+                  <%= journeys[i].departureTime %><%= time %>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small">Price :</span>
-                  <%= journeys[i].departure_price %> €
+                  <%= journeys[i].price %> €
                 </li>
               </ul>
               <% } %>
