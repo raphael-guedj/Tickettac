@@ -64,11 +64,12 @@ router.post("/success", async function (req, res, next) {
           date: req.body.date,
           departureTime: journey[i].departureTime,
           price: journey[i].price,
+          id: journey[i]._id,
         });
       }
     }
   }
-
+  console.log(success);
   res.render("success", { success });
 });
 
@@ -79,32 +80,35 @@ router.get("/failed", function (req, res, next) {
 
 /* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
-  var alreadyExist = false;
   console.log(req.query);
-
-  if (req.session.journeys[i].price === req.query.price) {
-    alreadyExist = true;
-    console.log("exist");
-    res.redirect("/success");
-  } else {
+  var alreadyExists = false;
+  for (var i = 0; i < req.session.journeys.length; i++) {
+    if (req.session.journeys[i].price == req.query.price) {
+      alreadyExists = true;
+    }
+  }
+  if (alreadyExists == false) {
     req.session.journeys.push({
       departure_city: req.query.departure_city,
       arrival_city: req.query.arrival_city,
       date: req.query.date,
       departure_time: req.query.departureTime,
-      price: req.query.price,
+      price: Number(req.query.price),
+      id: req.query.id,
     });
-    console.log("testok");
   }
+  console.log(req.session.journeys);
+
   res.render("shop", { journeys: req.session.journeys });
 });
 
 /* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/
 router.get("/lasttrips", async function (req, res, next) {
-  var user = await UserModel.findById(req.session.id)
+  var user = await UserModel.findById(req.session.user.id)
     .populate("journeys")
     .exec();
-  res.render("lasttrips", { lasttrips: user.myjourneys });
+  console.log(user);
+  res.render("lasttrips");
 });
 
 // Cette route est juste une verification du Save.

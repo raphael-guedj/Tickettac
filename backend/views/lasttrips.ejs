@@ -34,16 +34,13 @@
               <th scope="col">Departure time</th>
               <th scope="col">Price</th>
             </tr>
-            <% 
-            for(var i = 0; i<lasttrips.length; i++) {
-            %>
+
             <tr class="table-light">
-              <td><%= lasttrips[i].date %></td>
-              <td><%= lasttrips[i].departure_city %>/<%= lasttrips[i].arrival_city %></td>
-              <td><%= lasttrips[i].departure_time %></td>
-              <td><%= lasttrips[i].price %> €</td>
+              <td></td>
+              <td>/</td>
+              <td></td>
+              <td>€</td>
             </tr>
-            <% } %>
           </tbody>
         </table>
         <div class="row justify-content-end">
