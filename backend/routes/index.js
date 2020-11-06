@@ -21,6 +21,10 @@ var date = [
   "2018-11-24",
 ];
 
+var dateFormat = (date) => {
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+};
+
 /* GET login page. */
 router.get("/", function (req, res, next) {
   res.render("login", { title: "Express" });
@@ -28,20 +32,54 @@ router.get("/", function (req, res, next) {
 
 /*GET home page. */
 router.get("/home", function (req, res, next) {
-  res.render("homepage", { title: "Express" });
+  res.render("homepage", {});
 });
 
+/* GET success page -- page qui s'affiche après avoir interrogé la base de données et qui affiche tous les trains dispos  */
+router.post("/success", async function (req, res, next) {
+  if (req.session.journeys == undefined) {
+    req.session.journeys = [];
+  }
+
+  var success = [];
+  console.log(req.body);
+
+  var journey = await JourneyModel.find({
+    departure: req.body.departure,
+    arrival: req.body.arrival,
+    date: req.body.date,
+  });
+  if (journey.length === 0) {
+    res.redirect("/failed");
+  } else {
+    for (var i = 0; i < journey.length; i++) {
+      if (
+        journey[i].departure === req.body.departure &&
+        journey[i].arrival === req.body.arrival &&
+        dateFormat(journey[i].date) === req.body.date
+      ) {
+        success.push({
+          departure: req.body.departure,
+          arrival: req.body.arrival,
+          date: req.body.date,
+          departureTime: journey[i].departureTime,
+          price: journey[i].price,
+        });
+      }
+    }
+  }
+
+  res.render("success", { success });
+});
+
+/*oups page */
 router.get("/failed", function (req, res, next) {
   res.render("failed", { title: "Express" });
 });
 
-/* GET success page -- page qui s'affiche après avoir interrogé la base de données et qui affiche tous les trains dispos  */
-router.get("/success", function (req, res, next) {
-  res.render("success", { title: "Express" });
-});
-
 /* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
+  console.log(req.query);
   res.render("shop", { title: "Express" });
 });
 
