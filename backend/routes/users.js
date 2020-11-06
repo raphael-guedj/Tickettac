@@ -48,7 +48,7 @@ router.post('/sign-in', async function(req, res, next) {
     // console.log(req.session.user);
     res.redirect('/home')
   } else {
-    res.render('login');
+    res.redirect('/');
   }
 });
 
