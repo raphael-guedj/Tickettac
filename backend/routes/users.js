@@ -41,13 +41,14 @@ router.post('/sign-in', async function(req, res, next) {
     });
   if (userExists) {
     req.session.user = {
-      username: userExists.username,
+      lastName: userExists.lastName,
+      firstName: userExists.firstName,
       id: userExists._id
     }
     // console.log(req.session.user);
     res.redirect('/home')
   } else {
-    res.render('login');
+    res.redirect('/');
   }
 });
 
