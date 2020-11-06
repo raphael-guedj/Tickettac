@@ -26,7 +26,7 @@
     <div class="container">
       <div class="mt-5">
         <h2 class="text-white offset-md-2">My tickets:</h2>
-        <% if (journeys.length < 1) { %>
+        <% if (journeys == undefined) { %>
           <p style="color:red">You didn't select a ticket yet</p>
         <% } else { %>  
         <table class="table mt-4">
@@ -39,14 +39,22 @@
               <th scope="col">Price</th>
             </tr>
             <% 
+            var date = journeys[0].date;
+            var newFormat = date.slice(8,10) + "/" + date.slice(5,7) + "/" + date.slice(0,4);
             var total = 0;
             for(var i = 0; i<journeys.length; i++) {
+              var time = "";
+              if ( Number(journeys[i].departure_time) < 1200) {
+                time = " AM"
+              } else {
+                time = " PM"
+              }
             %>
             <tr class="table-light">
-              <th scope="row"><span><%= i %></span></th>
+              <th scope="row"><span><%= i+1 %></span></th>
               <td><%= journeys[i].departure_city %>/<%= journeys[i].arrival_city %></td>
-              <td><%= journeys[i].date %></td>
-              <td><%= journeys[i].departure_time %></td>
+              <td><%= newFormat %></td>
+              <td><%= journeys[i].departure_time %><%= time %></td>
               <td><%= journeys[i].price %> €</td>
             </tr>
             <% total += journeys[i].price
