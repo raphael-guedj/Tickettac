@@ -79,7 +79,6 @@ router.get("/failed", function (req, res, next) {
 
 /* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
-<<<<<<< HEAD
   var alreadyExist = false;
   for (var i=0; i<req.session.journeys.length; i++) {
     if (req.session.journey[i].price == req.query.price) {
@@ -97,10 +96,6 @@ router.get("/shop", function (req, res, next) {
     }
   }
   res.render("shop", { journeys: req.session.journeys });
-=======
-  console.log(req.query);
-  res.render("shop", { title: "Express" });
->>>>>>> main
 });
 
 /* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/
