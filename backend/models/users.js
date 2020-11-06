@@ -1,7 +1,15 @@
 var mongoose = require("mongoose");
 
+var journeySchema = mongoose.Schema({
+  departure: String,
+  arrival: String,
+  date: Date,
+  departureTime: String,
+  price: Number,
+});
+
 var userSchema = mongoose.Schema({
-  myjourneys: [{ type: mongoose.Schema.Types.ObjectId, ref: "journeys" }],
+  myjourneys: [journeySchema],
   lastName: String,
   firstName: String,
   email: String,
