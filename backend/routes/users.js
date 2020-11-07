@@ -1,7 +1,6 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 var UserModel = require("../models/users");
-
 
 // /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -9,46 +8,44 @@ var UserModel = require("../models/users");
 // });
 
 /* POST sign-up page. */
-router.post('/sign-up', async function(req, res, next) {
-  var userExists = await UserModel.findOne(
-    { email: req.body.email }
-  );
+router.post("/sign-up", async function (req, res, next) {
+  var userExists = await UserModel.findOne({ email: req.body.email });
+  // console.log(userExists);
   if (userExists) {
-    res.redirect('/'); 
+    res.redirect("/");
   } else {
-    var newUser = new UserModel ({
-      lastName : req.body.lastname,
+    var newUser = new UserModel({
+      lastName: req.body.lastname,
       firstName: req.body.firstname,
       email: req.body.email,
       password: req.body.password,
     });
     newUser = await newUser.save();
     req.session.user = {
-      lastName : req.body.lastname,
+      lastName: req.body.lastname,
       firstName: req.body.firstname,
-      id: newUser._id
-    }
-    res.redirect('/home');
+      id: newUser._id,
+    };
+    res.redirect("/home");
   }
 });
 
 /* POST sign-in page. */
-router.post('/sign-in', async function(req, res, next) {
-  var userExists = await UserModel.findOne(
-    { 
-      email: req.body.email,
-      password: req.body.password
-    });
+router.post("/sign-in", async function (req, res, next) {
+  var userExists = await UserModel.findOne({
+    email: req.body.email,
+    password: req.body.password,
+  });
   if (userExists) {
     req.session.user = {
       lastName: userExists.lastName,
       firstName: userExists.firstName,
-      id: userExists._id
-    }
-    // console.log(req.session.user);
-    res.redirect('/home')
+      id: userExists._id,
+    };
+    console.log(req.session.user);
+    res.redirect("/home");
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 });
 

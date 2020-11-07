@@ -22,13 +22,11 @@
     <title>Ticketac</title>
   </head>
   <body>
-    <%- include('navbar'); %>
+    <%- include('navbar') %>
     <div class="container">
       <div class="mt-5">
         <h2 class="text-white offset-md-2">My tickets:</h2>
-        <% if (journeys == undefined) { %>
-          <p style="color:red">You didn't select a ticket yet</p>
-        <% } else { %>  
+
         <table class="table mt-4">
           <tbody>
             <tr class="table-light">
@@ -57,27 +55,25 @@
               <td><%= journeys[i].departureTime %><%= time %></td>
               <td><%= journeys[i].price %> €</td>
             </tr>
-            <% total += journeys[i].price
-            }
-            %>
+            <% total += journeys[i].price } %>
             <tr class="table-danger">
               <th scope="row"><span>Total</span></th>
               <td></td>
               <td></td>
               <td></td>
-              <td class="font-weight-bold"><%= total %> €</td>
+              <td class="font-weight-bold"><%= total %> € </td>
             </tr>
           </tbody>
         </table>
-        <% } %>
+      
         <div class="row justify-content-end">
           <div class="pr-4">
-            <a
-              href="/updateuser"
+            <button
+             type ='submit'
               class="btn btn-danger"
-
-              >Confirm</a
-            >
+               data-toggle="modal"
+              data-target="#staticBackdrop"  
+              > Confirm </button>
           </div>
         </div>
       </div>
@@ -125,37 +121,34 @@
               %>  
               <ul class="list-group list-group-flush mt-2 mx-1">
                 <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Order N°</span
-                  ><%= i+1 %>
+                  <span class="text-dark font-weight-bold small">Order N° <%= i+1 %> </span>
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small"
-                    >Journey :</span
-                  >
-                  <%= journeys[i].departure %>/<%= journeys[i].arrival %>
+                    >Journey : <%= journeys[i].departure %>/<%= journeys[i].arrival %> </span>
+                  
                 </li>
                 <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Date :</span>
-                  <%= newFormat %>
+                  <span class="text-dark font-weight-bold small">Date :  <%= newFormat %></span>
+                 
                 </li>
                 <li class="list-group-item pop-up">
                   <span class="text-dark font-weight-bold small"
-                    >Departure :</span
-                  >
-                  <%= journeys[i].departureTime %><%= time %>
+                    >Departure : <%= journeys[i].departureTime %><%= time %> </span>
+                  
                 </li>
                 <li class="list-group-item pop-up">
-                  <span class="text-dark font-weight-bold small">Price :</span>
-                  <%= journeys[i].price %> €
+                  <span class="text-dark font-weight-bold small">Price : <%= journeys[i].price %> €</span>
+                  
                 </li>
               </ul>
               <% } %>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
+            <a href="/updateuser" class="btn btn-danger">
               Back to the home page
-            </button>
+            </a>
           </div>
         </div>
       </div>

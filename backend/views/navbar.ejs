@@ -1,12 +1,18 @@
 <nav class="header navbar navbar-light bg-light">
-  <a class="navbar-brand font-weight-bold" href="#"
+  <a class="navbar-brand font-weight-bold" href="/home"
     ><img src="images/train.png" alt="logo" class="logo pr-3" />Ticketac
   </a>
   <ul class="navbar-nav flex-row">
     <li class="nav-item active">
-      <a class="nav-link text-danger text-white font-weight-bold pr-5" href="#"
-        >Connection</a
-      >
+      <% if (users == undefined ){ %>
+      <a class="nav-link text-danger text-white font-weight-bold pr-5" href="/">
+        Connection
+      </a>
+      <% } else { %>
+      <a class="nav-link text-danger text-white font-weight-bold pr-5">
+        Bienvenue <%= users.firstName %>
+      </a>
+      <% } %>
     </li>
     <li class="nav-item">
       <a class="nav-link pr-5" href="/lasttrips">My last trips</a>

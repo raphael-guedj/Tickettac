@@ -27,12 +27,12 @@ var dateFormat = (date) => {
 
 /* GET login page. */
 router.get("/", function (req, res, next) {
-  res.render("login", { title: "Express" });
+  res.render("login", { users: req.session.user });
 });
 
 /*GET home page. */
 router.get("/home", function (req, res, next) {
-  res.render("homepage", {});
+  res.render("homepage", { users: req.session.user });
 });
 
 /* GET success page -- page qui s'affiche après avoir interrogé la base de données et qui affiche tous les trains dispos  */
@@ -49,6 +49,8 @@ router.post("/success", async function (req, res, next) {
     arrival: req.body.arrival,
     date: req.body.date,
   });
+  // console.log(journey);
+
   if (journey.length === 0) {
     res.redirect("/failed");
   } else {
@@ -64,27 +66,27 @@ router.post("/success", async function (req, res, next) {
           date: req.body.date,
           departureTime: journey[i].departureTime,
           price: journey[i].price,
-          id: journey[i]._id
+          id: journey[i]._id,
         });
       }
     }
   }
 
-  res.render("success", { success });
+  res.render("success", { success, users: req.session.user });
 });
 
 /*oups page */
 router.get("/failed", function (req, res, next) {
-  res.render("failed", { title: "Express" });
+  res.render("failed", { users: req.session.user });
 });
 
 /* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
   var alreadyExists = false;
-  for (var i=0; i<req.session.journeys.length; i++) {
+  for (var i = 0; i < req.session.journeys.length; i++) {
     if (req.session.journeys[i].price == req.query.price) {
       alreadyExists = true;
-    }   
+    }
   }
   if (alreadyExists == false) {
     req.session.journeys.push({
@@ -93,41 +95,48 @@ router.get("/shop", function (req, res, next) {
       date: req.query.date,
       departureTime: req.query.departureTime,
       price: Number(req.query.price),
-      id: req.query.id
-      }) 
+      id: req.query.id,
+    });
   }
-    res.render("shop", { journeys : req.session.journeys });
+  console.log(req.session.journeys);
+  res.render("shop", {
+    journeys: req.session.journeys,
+    users: req.session.user,
+  });
 });
 
 /* GET */
 router.get("/updateuser", async function (req, res, next) {
-  console.log("route update user");
-  console.log(req.session.user)
-  console.log(req.session.journeys);
+  console.log(req.session.user);
+
   var myjourneys = req.session.journeys;
+  console.log(myjourneys);
+
   const user = await UserModel.findById(req.session.user.id);
-  for (var i=0; i<myjourneys.length; i++) {
-  user.myjourneys.push({   
-    departure: myjourneys[i].departure,
-    arrival: myjourneys[i].arrival,
-    date: myjourneys[i].date,
-    departureTime: myjourneys[i].departure,
-    price: myjourneys[i].price})
+
+  for (var i = 0; i < myjourneys.length; i++) {
+    user.myjourneys.push({
+      departure: myjourneys[i].departure,
+      arrival: myjourneys[i].arrival,
+      date: myjourneys[i].date,
+      departureTime: myjourneys[i].departureTime,
+      price: myjourneys[i].price,
+    });
   }
   await user.save();
   console.log(user);
-  // var user = await UserModel.updateMany({_id: req.session.user.id}, {myjourneys: req.session.journeys});
   res.redirect("/home");
 });
-
 
 /* GET mylasttrips page. affiche l'ensemble des trajets effectués par l'utilisateur*/
 router.get("/lasttrips", async function (req, res, next) {
   const user = await UserModel.findById(req.session.user.id);
-  res.render("lasttrips", { lasttrips: user.myjourneys });
+
+  res.render("lasttrips", {
+    lasttrips: user.myjourneys,
+    users: req.session.user,
+  });
 });
-
-
 
 // Cette route est juste une verification du Save.
 // Vous pouvez choisir de la garder ou la supprimer.

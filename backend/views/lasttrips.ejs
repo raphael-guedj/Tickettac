@@ -34,13 +34,18 @@
               <th scope="col">Departure time</th>
               <th scope="col">Price</th>
             </tr>
-            <% 
-            for(var i = 0; i<lasttrips.length; i++) {
-            %>
+            <!-- prettier-ignore -->
+            <%  for(var i = 0; i < lasttrips.length; i++) { 
+              var time = ""; 
+              if ( Number(lasttrips[i].departureTime) < 1200) { 
+                time = " AM" 
+              } else {
+                time = " PM" } %>
+
             <tr class="table-light">
-              <td><%= lasttrips[i].date %></td>
-              <td><%= lasttrips[i].departure_city %>/<%= lasttrips[i].arrival_city %></td>
-              <td><%= lasttrips[i].departure_time %></td>
+              <td><%= dateLastTrips(lasttrips[i].date) %></td>
+              <td><%= lasttrips[i].departure %>/<%= lasttrips[i].arrival %></td>
+              <td><%= lasttrips[i].departureTime + time %></td>
               <td><%= lasttrips[i].price %> €</td>
             </tr>
             <% } %>
@@ -48,7 +53,7 @@
         </table>
         <div class="row justify-content-end">
           <div class="pr-5">
-            <button href="/" class="btn btn-danger">Home</button>
+            <a href="/home" class="btn btn-danger">Home</a>
           </div>
         </div>
       </div>

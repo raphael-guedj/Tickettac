@@ -10,6 +10,11 @@ var usersRouter = require("./routes/users");
 // var models = require('./routes/index')
 
 var app = express();
+
+app.locals.dateLastTrips = (date) => {
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+};
+
 app.use(
   session({
     secret: "a4f8071f-c873-4447-8ee2",
