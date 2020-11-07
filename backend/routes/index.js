@@ -82,6 +82,7 @@ router.get("/failed", function (req, res, next) {
 
 /* GET shop page. représente le panier contenant les billets*/
 router.get("/shop", function (req, res, next) {
+  console.log(req.query);
   var alreadyExists = false;
   for (var i = 0; i < req.session.journeys.length; i++) {
     if (req.session.journeys[i].price == req.query.price) {
@@ -113,7 +114,6 @@ router.get("/updateuser", async function (req, res, next) {
   console.log(myjourneys);
 
   const user = await UserModel.findById(req.session.user.id);
-
   for (var i = 0; i < myjourneys.length; i++) {
     user.myjourneys.push({
       departure: myjourneys[i].departure,

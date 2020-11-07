@@ -10,7 +10,6 @@ var UserModel = require("../models/users");
 /* POST sign-up page. */
 router.post("/sign-up", async function (req, res, next) {
   var userExists = await UserModel.findOne({ email: req.body.email });
-  // console.log(userExists);
   if (userExists) {
     res.redirect("/");
   } else {
@@ -42,7 +41,7 @@ router.post("/sign-in", async function (req, res, next) {
       firstName: userExists.firstName,
       id: userExists._id,
     };
-    console.log(req.session.user);
+    // console.log(req.session.user);
     res.redirect("/home");
   } else {
     res.redirect("/");
