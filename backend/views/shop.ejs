@@ -26,6 +26,7 @@
     <div class="container">
       <div class="mt-5">
         <h2 class="text-white offset-md-2">My tickets:</h2>
+
         <table class="table mt-4">
           <tbody>
             <tr class="table-light">
@@ -39,7 +40,7 @@
             var date = journeys[0].date;
             var newFormat = date.slice(8,10) + "/" + date.slice(5,7) + "/" + date.slice(0,4);
             var total = 0;
-            for(var i = 0; i<journeys.length; i++) {
+            for(var i = 0; i < journeys.length; i++) {
               var time = "";
               if ( Number(journeys[i].departureTime) < 1200) {
                 time = " AM"
