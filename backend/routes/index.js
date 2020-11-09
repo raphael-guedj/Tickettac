@@ -124,6 +124,7 @@ router.get("/updateuser", async function (req, res, next) {
     });
   }
   await user.save();
+  req.session.journeys = null;
   res.redirect("/home");
 });
 
